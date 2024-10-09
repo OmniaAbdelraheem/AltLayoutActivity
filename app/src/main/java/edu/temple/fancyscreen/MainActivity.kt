@@ -4,34 +4,27 @@ import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.ViewHolder
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         findViewById<ImageView>(R.id.profile_photo).setImageResource(R.drawable.istockphoto)
-
-        findViewById<TextView>(R.id.name).setText("Michelle Townsend")
+        findViewById<TextView>(R.id.name).text = "Michelle Townsend"
 
         with(findViewById<TextView>(R.id.email)) {
             text = "mt@ourcompany.com"
             setTextColor(Color.BLUE)
         }
-
         findViewById<TextView>(R.id.extension).text = "2253"
-
         findViewById<TextView>(R.id.department).text = "Design"
-
         findViewById<TextView>(R.id.supervisor).text = "Gail Davers"
 
-        with (findViewById<RecyclerView>(R.id.directReportsRecyclerView)) {
+        with(findViewById<RecyclerView>(R.id.directReportsRecyclerView)) {
             adapter = RecyclerViewAdapter(
                 arrayOf(
                     "Kate Sacloff",
@@ -47,17 +40,15 @@ class MainActivity : AppCompatActivity() {
     }
 }
 
-class RecyclerViewAdapter (private val staffList: Array<String>) : RecyclerView.Adapter<RecyclerViewAdapter.StaffListViewHolder>() {
-    class StaffListViewHolder(val textView: TextView) : ViewHolder(textView) {
-
-    }
+class RecyclerViewAdapter(private val staffList: Array<String>) : RecyclerView.Adapter<RecyclerViewAdapter.StaffListViewHolder>() {
+    class StaffListViewHolder(val textView: TextView) : RecyclerView.ViewHolder(textView)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StaffListViewHolder {
         return StaffListViewHolder(
             TextView(parent.context).apply {
                 textSize = 22f
                 setTextColor(Color.BLUE)
-                setPadding(50,8,0,8)
+                setPadding(50, 8, 0, 8)
             }
         )
     }
